@@ -26,7 +26,7 @@
                 </select>
             </p>
             <center>
-                <input id="itemSubmit" name="itemSubmit" type="submit" value="Order">
+                <input id="itemSubmit" name="itemSubmit" type="submit" value="item">
             </center>
         </form>
     </body>
