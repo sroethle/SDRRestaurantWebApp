@@ -14,18 +14,20 @@
     </head>
     <body>
         <%
-            double totalBill = (Double)request.getAttribute("areaRectangle");
-            double tax = (Double)request.getAttribute("areaRectangle");
-            double tip = (Double)request.getAttribute("areaRectangle");
-            Map<String, Double> items = (Map<String, Double>)request.getAttribute("areaRectangle");
+            double totalBill = (Double)request.getAttribute("totalBill");
+            double tax = (Double)request.getAttribute("tax");
+            double tip = (Double)request.getAttribute("tip");
+            String temp = (String)request.getAttribute("temp");
+            Map<String, Double> items = (Map<String, Double>)request.getAttribute("items");
 
-                for (Double value : items.values()) {
+                for (String value : items.keySet()) {
                     out.println("<h2> Item: " + String.valueOf(value) + " </h2>");
                 }
             
             out.println("<h2> The Bill is: " + String.valueOf(totalBill) + " </h2>");
             out.println("<h2> The total tax is: " + String.valueOf(tax) + " </h2>");
             out.println("<h2> The suggested tip is: " + String.valueOf(tip) + " </h2>");
+            out.println("<h2> Temp: " + temp + " </h2>");
         %>
     </body>
 </html>

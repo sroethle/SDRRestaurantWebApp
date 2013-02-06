@@ -4,6 +4,7 @@
     Author     : Scotty
 --%>
 
+<%@page import="java.util.Map"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -26,8 +27,26 @@
                 </select>
             </p>
             <center>
-                <input id="itemSubmit" name="itemSubmit" type="submit" value="item">
+                <input id="itemSubmit" name="itemSubmit" type="submit" value="Add Item">
+                <input id="calcBill" name="calcBill" type="submit" value="Calculate Bill">
             </center>
         </form>
+        <%
+            //Object objItem = request.getAttribute("items");
+            Map<String, Double> items = (Map<String, Double>) request.getAttribute("items");
+            if (items != null) {
+                for (String value : items.keySet()) {
+                    out.println("<h2> Item Ordered: " + String.valueOf(value) + " </h2>");
+                }
+            }
+        %>
+
+                <form id="calculateBill" name="calculateBill" method="POST" action="RestaurantController">
+            <center>
+                <input id="calcBill" name="calcBill" type="submit" value="Calculate Bill">
+            </center>
+        </form>
+        
+        
     </body>
 </html>

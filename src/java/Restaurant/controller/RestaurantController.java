@@ -24,7 +24,7 @@ import javax.servlet.http.HttpServletResponse;
  */
 @WebServlet(name = "RestaurantController", urlPatterns = {"/RestaurantController"})
 public class RestaurantController extends HttpServlet {
-    private static final String destination = "/resultView.jsp";
+    private String destination = "/resultView.jsp";
 
     /**
      * Processes requests for both HTTP
@@ -42,25 +42,43 @@ public class RestaurantController extends HttpServlet {
          // parameters are name attributes in view pages
         // Here we're retrieving form content from form.html
         String c = request.getParameter("item");
+        String addItemButton = request.getParameter("itemSubmit");
+        String calcButton = request.getParameter("calcBill");
         
         // Create a new instance of a model object
         // For some applications, we would not want to create a new one each time.
-        RestaurantBill bill = new RestaurantBill();
         
-        bill.addItemToBill(c);
+            RestaurantBill bill = new RestaurantBill();
+
+        if (addItemButton != null){
+            bill.addItemToBill(c);
+            Map<String, Double> items = bill.getItems();
+            request.setAttribute("items", items);
+            destination = "/indexjsp";
+        }
+        
+        
+        if (calcButton != null) {
+            double totalBill = bill.getBillAmount();
+            double tax = bill.getTax(totalBill);
+            double suggestedTip = bill.getSuggestedTip(totalBill);
+            Map<String, Double> items = bill.getItems();
+            request.setAttribute("totalBill", totalBill);
+            request.setAttribute("tax", tax);
+            request.setAttribute("tip", suggestedTip);
+            request.setAttribute("items", items);
+            
+            destination = "/resultView.jsp";
+        }
+
        
-        double totalBill = bill.getBillAmount();
-        double tax = bill.getTax(totalBill);
-        double suggestedTip = bill.getSuggestedTip(totalBill);
-        Map<String,Double> items = bill.getItems();
+
 
         // Parameters are read only Request object properties, but attributes
         // are read/write. We can use attributes to store data for use on
         // another page.
-        request.setAttribute("totalBill", totalBill);
-        request.setAttribute("tax", tax);
-        request.setAttribute("tip", suggestedTip);
-        request.setAttribute("items", items);
+
+
 
         
         

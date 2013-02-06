@@ -53,14 +53,14 @@ public class RestaurantBill {
     public double getTax(double billAmount) {
         double tax;
 
-        tax = billAmount * 1.15;
+        tax = billAmount * .10;
         return tax;
     }
 
     public double getSuggestedTip(double billAmount) {
         double tip;
 
-        tip = billAmount * 1.15;
+        tip = billAmount * .15;
 
         return tip;
     }
