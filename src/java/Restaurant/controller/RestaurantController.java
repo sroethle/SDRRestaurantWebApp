@@ -4,7 +4,7 @@
  */
 package Restaurant.controller;
 
-import Restaurant.model.RestaurantBill;
+import Restaurant.model.RestaurantService;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.HashSet;
@@ -41,37 +41,25 @@ public class RestaurantController extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
          // parameters are name attributes in view pages
         // Here we're retrieving form content from form.html
-        String c = request.getParameter("item");
-        String addItemButton = request.getParameter("itemSubmit");
-        String calcButton = request.getParameter("calcBill");
+        String appetizer = request.getParameter("appetizer");
+        String mainCourse = request.getParameter("mainCourse");
+        String drink = request.getParameter("drink");
+        String desert = request.getParameter("desert");
         
         // Create a new instance of a model object
         // For some applications, we would not want to create a new one each time.
-        
-            RestaurantBill bill = new RestaurantBill();
 
-        if (addItemButton != null){
-            bill.addItemToBill(c);
-            Map<String, Double> items = bill.getItems();
-            request.setAttribute("items", items);
-            destination = "/indexjsp";
-        }
-        
-        
-        if (calcButton != null) {
-            double totalBill = bill.getBillAmount();
-            double tax = bill.getTax(totalBill);
-            double suggestedTip = bill.getSuggestedTip(totalBill);
-            Map<String, Double> items = bill.getItems();
-            request.setAttribute("totalBill", totalBill);
-            request.setAttribute("tax", tax);
-            request.setAttribute("tip", suggestedTip);
-            request.setAttribute("items", items);
-            
-            destination = "/resultView.jsp";
-        }
+        RestaurantService bill = new RestaurantService();
 
-       
+        bill.addItemToBill(appetizer);
+        bill.addItemToBill(mainCourse);
+        bill.addItemToBill(drink);
+        bill.addItemToBill(desert);  
+
+        request.setAttribute("items", bill.getItemsOrdered());
+        request.setAttribute("totals", bill.getBillTotals());
+
+        destination = "/resultView.jsp";
 
 
         // Parameters are read only Request object properties, but attributes

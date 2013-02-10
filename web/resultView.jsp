@@ -1,33 +1,36 @@
 <%-- 
     Document   : resultView
     Created on : Feb 3, 2013, 8:51:35 PM
-    Author     : Scotty
+    Author     : Scott Roethle
 --%>
 
+<%@page import="Restaurant.model.RestaurantService"%>
+<%@page import="java.util.TreeSet"%>
+<%@page import="java.util.Set"%>
 <%@page import="java.util.Map"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <title>Receipt Page</title>
     </head>
     <body>
+        <h2>Thank you for dining at Roethle's Restaurant!</h2>
         <%
-            double totalBill = (Double)request.getAttribute("totalBill");
-            double tax = (Double)request.getAttribute("tax");
-            double tip = (Double)request.getAttribute("tip");
-            String temp = (String)request.getAttribute("temp");
-            Map<String, Double> items = (Map<String, Double>)request.getAttribute("items");
+            Map<String, Double> items = (Map<String, Double>) request.getAttribute("items");
+            Map<String, Double> totals = (Map<String, Double>) request.getAttribute("totals");
 
-                for (String value : items.keySet()) {
-                    out.println("<h2> Item: " + String.valueOf(value) + " </h2>");
+            for (Map.Entry entry : items.entrySet()) {
+                if (!entry.getKey().equals("none")){
+                    out.println("<p> Sale Item: " + entry.getKey() + " - $" + entry.getValue() + " </p>");
                 }
-            
-            out.println("<h2> The Bill is: " + String.valueOf(totalBill) + " </h2>");
-            out.println("<h2> The total tax is: " + String.valueOf(tax) + " </h2>");
-            out.println("<h2> The suggested tip is: " + String.valueOf(tip) + " </h2>");
-            out.println("<h2> Temp: " + temp + " </h2>");
+            }
+            out.println("<p> -------------------- <p>");
+                    
+            for (Map.Entry entry : totals.entrySet()) {
+                out.println("<p> " + entry.getKey() + " - $" + entry.getValue() + " </p>");
+            }
         %>
     </body>
 </html>

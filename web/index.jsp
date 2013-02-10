@@ -13,40 +13,75 @@
         <title>JSP Page</title>
     </head>
     <body>
-        <h1 align="center">Restaurant Order</h1>
-        <form id="form1" name="form1" method="POST" action="RestaurantController">
-            <p>Select menu item<p>
-            <p>Item:
+        <h1>Welcome to Roethle's Restaurant</h1>
+        <form id="order" name="order" method="POST" action="RestaurantController" onsubmit="return validateItemSelected()">
+            <p>Select the items that you would like to order!<p>
+            <p>Appetizer:
                 <!-- the name attribute is set to 'color' which is the
                      parameter to be retrieved by the servlet -->
-                <select id="item" name="item" size ="1">
-                    <option value="steak"> steak </option>
-                    <option value="lobster">lobster</option>
-                    <option value="beer">beer</option>
-                    <option value="salad">salad</option>
+                <select id="appetizer" name="appetizer" size ="1">
+                    <option value=""> Select An Item </option>
+                    <option value="onionRings"> Onion Rings </option>
+                    <option value="mozzarellaSticks">Mozzarella Sticks</option>
+                    <option value="spinachArtichokeDip">Spinach & Artichoke Dip</option>
+                    <option value="cheeseburgerSliders">Cheeseburger Sliders </option>
                 </select>
             </p>
-            <center>
-                <input id="itemSubmit" name="itemSubmit" type="submit" value="Add Item">
-                <input id="calcBill" name="calcBill" type="submit" value="Calculate Bill">
-            </center>
-        </form>
-        <%
-            //Object objItem = request.getAttribute("items");
-            Map<String, Double> items = (Map<String, Double>) request.getAttribute("items");
-            if (items != null) {
-                for (String value : items.keySet()) {
-                    out.println("<h2> Item Ordered: " + String.valueOf(value) + " </h2>");
-                }
-            }
-        %>
+            <p>Main Course:
+                <!-- the name attribute is set to 'color' which is the
+                     parameter to be retrieved by the servlet -->
+                <select id="mainCourse" name="mainCourse" size ="1">
+                    <option value=""> Select An Item </option>
+                    <option value="steak"> Steak </option>
+                    <option value="lobster">Lobster</option>
+                    <option value="cheeseburger">Cheeseburger</option>
+                    <option value="chickenSalad">Chicken Salad</option>
+                </select>
+            </p>
+            <p>Drink:
+                <!-- the name attribute is set to 'color' which is the
+                     parameter to be retrieved by the servlet -->
+                <select id="drink" name="drink" size ="1">
+                    <option value=""> Select An Item </option>
+                    <option value="soda"> Soda </option>
+                    <option value="beer">Beer</option>
+                    <option value="wine">Wine</option>
+                    <option value="tea">Tea</option>
+                </select>
+            </p>
+            <p>Dessert:
+                <!-- the name attribute is set to 'color' which is the
+                     parameter to be retrieved by the servlet -->
+                <select id="desert" name="desert" size ="1">
+                    <option value=""> Select An Item </option>
+                    <option value="cake"> Cake </option>
+                    <option value="brownie">Brownie</option>
+                    <option value="ice cream">Ice Cream</option>
+                    <option value="cookie">Cookie</option>
+                </select>
+            </p>
+            
 
-                <form id="calculateBill" name="calculateBill" method="POST" action="RestaurantController">
-            <center>
-                <input id="calcBill" name="calcBill" type="submit" value="Calculate Bill">
-            </center>
-        </form>
+                <input id="itemSubmit" name="itemSubmit" type="submit" value="Place Order">
+
+        </form> 
         
-        
+        <script type="text/javascript">
+            function validateItemSelected()
+            {
+                var isValid = true;
+                var appitizer=document.forms["order"]["appetizer"].value;
+                var mainMenu=document.forms["order"]["mainCourse"].value;
+                var drink=document.forms["order"]["drink"].value;
+                var desert=document.forms["order"]["desert"].value;
+                
+                if (appitizer=="" && mainMenu=="" && drink=="" && desert==""){
+                    isValid = false
+                    alert("You must order at least one item!");
+                }
+                
+                return isValid;
+            }
+            </script>
     </body>
 </html>
