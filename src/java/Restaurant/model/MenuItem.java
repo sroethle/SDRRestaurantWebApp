@@ -60,7 +60,5 @@ public class MenuItem {
             return false;
         }
         return true;
-    }
-
-    
+    }  
 }
