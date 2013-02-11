@@ -1,16 +1,8 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package Restaurant.controller;
 
 import Restaurant.model.RestaurantService;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -19,8 +11,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
+ * Restaurant Controller that uses the service class to calculate the bill and
+ * forwards to the resultView page.
  *
- * @author Scotty
+ * @author Scott Roethle
  */
 @WebServlet(name = "RestaurantController", urlPatterns = {"/RestaurantController"})
 public class RestaurantController extends HttpServlet {
@@ -39,16 +33,13 @@ public class RestaurantController extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-         // parameters are name attributes in view pages
-        // Here we're retrieving form content from form.html
-        String appetizer = request.getParameter("appetizer");
-        String mainCourse = request.getParameter("mainCourse");
-        String drink = request.getParameter("drink");
-        String desert = request.getParameter("desert");
-        
-        // Create a new instance of a model object
-        // For some applications, we would not want to create a new one each time.
+       
+        int appetizer = Integer.parseInt(request.getParameter("appetizer"));
+        int mainCourse = Integer.parseInt(request.getParameter("mainCourse"));
+        int drink = Integer.parseInt(request.getParameter("drink"));
+        int desert = Integer.parseInt(request.getParameter("desert"));
 
+        // Create a new instance of a model object=
         RestaurantService bill = new RestaurantService();
 
         bill.addItemToBill(appetizer);
@@ -62,14 +53,6 @@ public class RestaurantController extends HttpServlet {
         destination = "/resultView.jsp";
 
 
-        // Parameters are read only Request object properties, but attributes
-        // are read/write. We can use attributes to store data for use on
-        // another page.
-
-
-
-        
-        
         // This object lets you forward both the request and response
         // objects to a destination page
         RequestDispatcher view =

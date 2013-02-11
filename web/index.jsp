@@ -1,7 +1,9 @@
 <%-- 
     Document   : index
     Created on : Feb 3, 2013, 8:02:23 PM
-    Author     : Scotty
+    Author     : Scott Roethle
+    Description: This page is the main page for a restaurant ording system.  It
+                 obtains the ordering items from the user.
 --%>
 
 <%@page import="java.util.Map"%>
@@ -20,50 +22,48 @@
                 <!-- the name attribute is set to 'color' which is the
                      parameter to be retrieved by the servlet -->
                 <select id="appetizer" name="appetizer" size ="1">
-                    <option value=""> Select An Item </option>
-                    <option value="onionRings"> Onion Rings </option>
-                    <option value="mozzarellaSticks">Mozzarella Sticks</option>
-                    <option value="spinachArtichokeDip">Spinach & Artichoke Dip</option>
-                    <option value="cheeseburgerSliders">Cheeseburger Sliders </option>
+                    <option value="0"> Select An Item </option>
+                    <option value="1"> Onion Rings </option>
+                    <option value="2">Mozzarella Sticks</option>
+                    <option value="3">Spinach & Artichoke Dip</option>
+                    <option value="4">Cheeseburger Sliders </option>
                 </select>
             </p>
             <p>Main Course:
                 <!-- the name attribute is set to 'color' which is the
                      parameter to be retrieved by the servlet -->
                 <select id="mainCourse" name="mainCourse" size ="1">
-                    <option value=""> Select An Item </option>
-                    <option value="steak"> Steak </option>
-                    <option value="lobster">Lobster</option>
-                    <option value="cheeseburger">Cheeseburger</option>
-                    <option value="chickenSalad">Chicken Salad</option>
+                    <option value="0"> Select An Item </option>
+                    <option value="5"> Steak </option>
+                    <option value="6">Lobster</option>
+                    <option value="7">Cheeseburger</option>
+                    <option value="8">Chicken Salad</option>
                 </select>
             </p>
             <p>Drink:
                 <!-- the name attribute is set to 'color' which is the
                      parameter to be retrieved by the servlet -->
                 <select id="drink" name="drink" size ="1">
-                    <option value=""> Select An Item </option>
-                    <option value="soda"> Soda </option>
-                    <option value="beer">Beer</option>
-                    <option value="wine">Wine</option>
-                    <option value="tea">Tea</option>
+                    <option value="0"> Select An Item </option>
+                    <option value="9"> Soda </option>
+                    <option value="10">Beer</option>
+                    <option value="11">Wine</option>
+                    <option value="12">Tea</option>
                 </select>
             </p>
             <p>Dessert:
                 <!-- the name attribute is set to 'color' which is the
                      parameter to be retrieved by the servlet -->
                 <select id="desert" name="desert" size ="1">
-                    <option value=""> Select An Item </option>
-                    <option value="cake"> Cake </option>
-                    <option value="brownie">Brownie</option>
-                    <option value="ice cream">Ice Cream</option>
-                    <option value="cookie">Cookie</option>
+                    <option value="0"> Select An Item </option>
+                    <option value="13"> Cake </option>
+                    <option value="14">Brownie</option>
+                    <option value="15">Ice Cream</option>
+                    <option value="16">Cookie</option>
                 </select>
             </p>
-            
-
+        
                 <input id="itemSubmit" name="itemSubmit" type="submit" value="Place Order">
-
         </form> 
         
         <script type="text/javascript">
@@ -75,7 +75,7 @@
                 var drink=document.forms["order"]["drink"].value;
                 var desert=document.forms["order"]["desert"].value;
                 
-                if (appitizer=="" && mainMenu=="" && drink=="" && desert==""){
+                if (appitizer=="0" && mainMenu=="0" && drink=="" && desert=="0"){
                     isValid = false
                     alert("You must order at least one item!");
                 }
