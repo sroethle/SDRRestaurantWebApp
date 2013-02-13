@@ -1,6 +1,6 @@
 package Restaurant.controller;
 
-import Restaurant.model.RestaurantService;
+import Restaurant.model.RestaurantBill;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.RequestDispatcher;
@@ -11,14 +11,14 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Restaurant Controller that uses the service class to calculate the bill and
+ * Restaurant Controller that uses the model object to calculate the bill and
  * forwards to the resultView page.
  *
  * @author Scott Roethle
  */
 @WebServlet(name = "RestaurantController", urlPatterns = {"/RestaurantController"})
 public class RestaurantController extends HttpServlet {
-    private String destination = "/resultView.jsp";
+    
 
     /**
      * Processes requests for both HTTP
@@ -33,25 +33,23 @@ public class RestaurantController extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
+        String destination = "/resultView.jsp";
        
         int appetizer = Integer.parseInt(request.getParameter("appetizer"));
         int mainCourse = Integer.parseInt(request.getParameter("mainCourse"));
         int drink = Integer.parseInt(request.getParameter("drink"));
         int desert = Integer.parseInt(request.getParameter("desert"));
 
-        // Create a new instance of a model object=
-        RestaurantService bill = new RestaurantService();
+        // Create a new instance of a model object
+        RestaurantBill bill = new RestaurantBill();
 
-        bill.addItemToBill(appetizer);
+        bill.addItemToBill(desert);
         bill.addItemToBill(mainCourse);
+        bill.addItemToBill(appetizer);
         bill.addItemToBill(drink);
-        bill.addItemToBill(desert);  
 
         request.setAttribute("items", bill.getItemsOrdered());
         request.setAttribute("totals", bill.getBillTotals());
-
-        destination = "/resultView.jsp";
-
 
         // This object lets you forward both the request and response
         // objects to a destination page

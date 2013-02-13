@@ -7,7 +7,6 @@
 
 <%@page import="java.util.HashSet"%>
 <%@page import="Restaurant.model.MenuItem"%>
-<%@page import="Restaurant.model.RestaurantService"%>
 <%@page import="java.util.TreeSet"%>
 <%@page import="java.util.Set"%>
 <%@page import="java.util.Map"%>

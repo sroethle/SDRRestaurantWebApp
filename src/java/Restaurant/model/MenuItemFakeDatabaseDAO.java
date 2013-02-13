@@ -9,6 +9,12 @@ package Restaurant.model;
  */
 public class MenuItemFakeDatabaseDAO implements IMenuItemDAO {
     
+    /**
+     * Returns the price of the menu item.
+     * 
+     * @param itemNumber
+     * @return price of the menu item
+     */
     @Override
     public double getItemPrice(int itemNumber) {
         double price;
@@ -68,6 +74,11 @@ public class MenuItemFakeDatabaseDAO implements IMenuItemDAO {
         return price;
     }
         
+    /**
+     * Returns the item name that corresponds to the item number.
+     * @param itemNumber  integer value for item number
+     * @return The String name that corresponds to an item number.
+     */
     @Override
       public String getItemName(int itemNumber) {
         String name;
@@ -126,6 +137,5 @@ public class MenuItemFakeDatabaseDAO implements IMenuItemDAO {
         }
 
         return name;
-
     } 
 }

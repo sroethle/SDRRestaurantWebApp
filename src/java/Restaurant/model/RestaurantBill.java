@@ -9,17 +9,27 @@ import java.util.Set;
 /**
  * Service class that provides necessary calculations for the Restaurant Bill.
  * @author Scott Roethle
+ * @version 1.0
  */
-public class RestaurantService {
+public class RestaurantBill {
     private IMenuItemDAO menuItemDatabase;
     private Set <MenuItem>items;
     private MenuItem item;
+    private final double TAX_RATE = .10;
+    private final double TIP_RATE = .15;
      
-    public RestaurantService(){
+    /**
+     * Default constructor that instantiates the class items.
+     */
+    public RestaurantBill(){
         menuItemDatabase = new MenuItemFakeDatabaseDAO();
         items = new HashSet<MenuItem>();
     } 
     
+    /**
+     * Adds an item to the Bill
+     * @param itemNumber Corresponds to a item number in a database
+     */
     public void addItemToBill(int itemNumber) {
         
         if (itemNumber != 0) {
@@ -32,30 +42,35 @@ public class RestaurantService {
         }
     }
     
+    /**
+     * Returns a set of MenuItems
+     * 
+     * @return a Set of MenuItems
+     */
     public Set<MenuItem> getItemsOrdered(){
         return items;
     } 
     
+    /**
+     * Gets the Restaurant bill totals.
+     * 
+     * @return Map of different totals for a bill.
+     */
     public Map<String, Double> getBillTotals(){
         Map<String, Double> totals = new<String, Double> HashMap();
         double subtotal = roundTwoDecimals(calculateSubtotal());
         
         totals.put("Subtotal", roundTwoDecimals(subtotal));
-        totals.put("Tax", (Double)roundTwoDecimals(getTax(subtotal)));
-        totals.put("Tip", (Double)roundTwoDecimals(getSuggestedTip(subtotal)));
-        totals.put("Total", (Double)roundTwoDecimals(calculateTotalBillAmount()));     
+        totals.put("Tax", roundTwoDecimals(getTax()));
+        totals.put("Tip", roundTwoDecimals(getSuggestedTip()));
+        totals.put("Total", roundTwoDecimals(calculateTotalBillAmount()));     
         
         return totals;    
     }
     
     private double calculateTotalBillAmount(){
-        double subtotal;
-        double bill;
         
-        subtotal = calculateSubtotal();
-        bill = subtotal + getTax(subtotal) + getSuggestedTip(subtotal);  
-        
-        return roundTwoDecimals(bill);
+        return calculateSubtotal() + getTax() + getSuggestedTip();
     }
 
     private double calculateSubtotal() {
@@ -64,23 +79,15 @@ public class RestaurantService {
         for (MenuItem i : items){
             bill += i.getItemPrice();
         }
-
         return bill;
     }
 
-    private double getTax(double billAmount) {
-        double tax;
-
-        tax = billAmount * .10;
-        return tax;
+    private double getTax() {
+        return calculateSubtotal() * TAX_RATE;
     }
 
-    private double getSuggestedTip(double billAmount) {
-        double tip;
-
-        tip = billAmount * .15;
-
-        return tip;
+    private double getSuggestedTip() {
+        return calculateSubtotal() * TIP_RATE;
     }
     
     private double roundTwoDecimals(double d) { 

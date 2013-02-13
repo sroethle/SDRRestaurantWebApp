@@ -13,13 +13,30 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>JSP Page</title>
+        <script type="text/javascript">
+            function validateItemSelected()
+            {
+                var isValid = true;
+                var appitizer=document.forms["order"]["appetizer"].value;
+                var mainMenu=document.forms["order"]["mainCourse"].value;
+                var drink=document.forms["order"]["drink"].value;
+                var desert=document.forms["order"]["desert"].value;
+                        
+                if (appitizer=="0" && mainMenu=="0" && drink=="" && desert=="0"){
+                    isValid = false
+                    alert("You must order at least one item!");
+                }
+                        
+                return isValid;
+            }
+        </script>
     </head>
     <body>
         <h1>Welcome to Roethle's Restaurant</h1>
         <form id="order" name="order" method="POST" action="RestaurantController" onsubmit="return validateItemSelected()">
             <p>Select the items that you would like to order!<p>
             <p>Appetizer:
-                <!-- the name attribute is set to 'color' which is the
+                <!-- the name attribute is set to 'appetizer' which is the
                      parameter to be retrieved by the servlet -->
                 <select id="appetizer" name="appetizer" size ="1">
                     <option value="0"> Select An Item </option>
@@ -30,7 +47,7 @@
                 </select>
             </p>
             <p>Main Course:
-                <!-- the name attribute is set to 'color' which is the
+                <!-- the name attribute is set to 'mainCourse' which is the
                      parameter to be retrieved by the servlet -->
                 <select id="mainCourse" name="mainCourse" size ="1">
                     <option value="0"> Select An Item </option>
@@ -41,7 +58,7 @@
                 </select>
             </p>
             <p>Drink:
-                <!-- the name attribute is set to 'color' which is the
+                <!-- the name attribute is set to 'drink' which is the
                      parameter to be retrieved by the servlet -->
                 <select id="drink" name="drink" size ="1">
                     <option value="0"> Select An Item </option>
@@ -52,7 +69,7 @@
                 </select>
             </p>
             <p>Dessert:
-                <!-- the name attribute is set to 'color' which is the
+                <!-- the name attribute is set to 'desert' which is the
                      parameter to be retrieved by the servlet -->
                 <select id="desert" name="desert" size ="1">
                     <option value="0"> Select An Item </option>
@@ -62,26 +79,8 @@
                     <option value="16">Cookie</option>
                 </select>
             </p>
-        
-                <input id="itemSubmit" name="itemSubmit" type="submit" value="Place Order">
+                
+            <input id="itemSubmit" name="itemSubmit" type="submit" value="Place Order">
         </form> 
-        
-        <script type="text/javascript">
-            function validateItemSelected()
-            {
-                var isValid = true;
-                var appitizer=document.forms["order"]["appetizer"].value;
-                var mainMenu=document.forms["order"]["mainCourse"].value;
-                var drink=document.forms["order"]["drink"].value;
-                var desert=document.forms["order"]["desert"].value;
-                
-                if (appitizer=="0" && mainMenu=="0" && drink=="" && desert=="0"){
-                    isValid = false
-                    alert("You must order at least one item!");
-                }
-                
-                return isValid;
-            }
-            </script>
     </body>
 </html>

@@ -11,26 +11,50 @@ public class MenuItem {
     private String itemName;
     private double itemPrice;
 
-    public Integer getItemNumber() {
+    /**
+     * 
+     * @return Integer that represents the menu item number.
+     */
+    public int getItemNumber() {
         return itemNumber;
     }
 
-    public void setItemNumber(Integer itemNumber) {
+    /**
+     * 
+     * @param itemNumber integer identifier for a menu item
+     */
+    public void setItemNumber(int itemNumber) {
         this.itemNumber = itemNumber;
     }
 
+    /**
+     *
+     * @return the name of the menu item
+     */
     public String getItemName() {
         return itemName;
     }
 
+    /**
+     *
+     * @param itemName the name of the menu item
+     */
     public void setItemName(String itemName) {
         this.itemName = itemName;
     }
 
+    /**
+     *
+     * @return the price charged to a customer for the menu item
+     */
     public double getItemPrice() {
         return itemPrice;
     }
 
+    /**
+     *
+     * @param itemPrice the price charged to a customer for the menu item
+     */
     public void setItemPrice(double itemPrice) {
         this.itemPrice = itemPrice;
     }
